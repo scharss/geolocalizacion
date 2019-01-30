@@ -1,0 +1,46 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v3"></script>
+</head>
+<body>
+    <h1>Estás Aquí</h1>
+    <div id="mapa" style="width: 700px; height: 500px;">
+        <!--aquí va el mapa-->
+    </div>
+    <script type="text/javascript">
+    //NAMESPACE google.maps.ALGO
+    var divMapa = document.getElementById('mapa');
+    navigator.geolocation.getCurrentPosition(fn_ok, fn_mal);
+    function fn_mal(){}
+    function fn_ok(rta){
+        var lat = rta.coords.latitude;
+        var lon = rta.coords.longitude;
+
+        var gLatLon = new google.maps.LatLng(lat, lon);
+        var objConfig ={
+            zoom: 17,
+            center: gLatLon
+        }
+
+        var gMapa = new google.maps.Map(divMapa, objConfig);
+
+        var objConfigMarker = {
+            position: gLatLon,
+            map: gMapa,
+            title: "Usted esta Aquí"
+        }
+        var gMarker = new google.maps.Marker(objConfigMarker);
+
+    }
+
+    </script>
+    
+</body>
+</html>
